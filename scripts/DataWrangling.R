@@ -27,7 +27,7 @@ Evictions = tbl_df(Evictions)
 
 Evictions = Evictions %>% 
   select(-'low-flag', -subbed, -name, -'median-household-income',-'poverty-rate') %>% 
-  rename(fips = GEOID, state='parent-location' ) 
+  rename(fips = GEOID, state='parent-location', pctAfAm='pct-af-am', evictionRate='eviction-rate') 
 
 Evictions$fips = as.numeric(Evictions$fips)
   
@@ -70,7 +70,7 @@ evictionData = inner_join(c, incomePoverty, by=c('fips', 'year') )
 
 rm(a, b, c, incomePoverty, allCauseMortality, Evictions, heartDzMortality, unemployment)
 save(evictionData, file="eviction-mortality/dataFrame/comdinedData.rda")
-
+write.csv(evictionData, file = "evictionData.csv")
 
 
 
